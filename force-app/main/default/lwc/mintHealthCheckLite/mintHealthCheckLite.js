@@ -191,9 +191,9 @@ export default class MintHealthCheckLite extends LightningElement {
         doc.setTextColor(87, 87, 87);
         doc.text(' = Advisory', 38, 85, { align: 'center' });
         doc.setTextColor(63, 217, 28);
-        doc.text('Green', 24, 90, { align: 'center' });
+        doc.text('Green', 25, 90, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = No Action Required', 44, 90, { align: 'center' });
+        doc.text(' = No Action Required', 45, 90, { align: 'center' });
         doc.text(overviewEndLine, 20, 100);
         tocEntries.push({ title: 'Overview', page: doc.getCurrentPageInfo().pageNumber });
         doc.addPage();
@@ -449,7 +449,7 @@ export default class MintHealthCheckLite extends LightningElement {
                         body: rows,
                         margin: { top: 40, bottom: 32 }, // Respect header/footer
                         styles: {
-                            fontSize: 8,
+                            fontSize: 10,
                             lineWidth: 0.2,
                             lineColor: [0, 0, 0],
                             halign: 'left',
@@ -460,7 +460,7 @@ export default class MintHealthCheckLite extends LightningElement {
                             fillColor: [0, 63, 121],
                             textColor: [255, 255, 255],
                             fontStyle: 'bold',
-                            fontSize: 10
+                            fontSize: 12
                         },
                         bodyStyles: {
                             font: 'calibri',
@@ -486,7 +486,7 @@ export default class MintHealthCheckLite extends LightningElement {
             body: metricEffortList,                  // Array of arrays
             margin: { left: 10 },
             styles: { 
-                fontSize: 8 ,
+                fontSize: 10,
                 lineWidth: 0.2,              // ← Border thickness
                 lineColor: [0, 0, 0],        // ← Black border
                 halign: 'left',
@@ -497,7 +497,7 @@ export default class MintHealthCheckLite extends LightningElement {
                 fillColor: [4, 240, 205],
                 textColor: [0, 63, 121],
                 fontStyle: 'bold',
-                fontSize: 10
+                fontSize: 12
             },
             bodyStyles: {
                 font: 'calibri',
