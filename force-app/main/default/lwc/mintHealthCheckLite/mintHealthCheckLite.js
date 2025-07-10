@@ -191,9 +191,9 @@ export default class MintHealthCheckLite extends LightningElement {
         doc.setTextColor(87, 87, 87);
         doc.text(' = Advisory', 38, 85, { align: 'center' });
         doc.setTextColor(63, 217, 28);
-        doc.text('Green', 25, 90, { align: 'center' });
+        doc.text('Green', 24.5, 90, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = No Action Required', 45, 90, { align: 'center' });
+        doc.text(' = No Action Required', 44.5, 90, { align: 'center' });
         doc.text(overviewEndLine, 20, 100);
         tocEntries.push({ title: 'Overview', page: doc.getCurrentPageInfo().pageNumber });
         doc.addPage();
