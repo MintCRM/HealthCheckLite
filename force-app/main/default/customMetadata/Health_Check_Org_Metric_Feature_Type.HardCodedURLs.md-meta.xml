@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>HardCodedURLs</label>
+    <protected>true</protected>
+    <values>
+        <field>Formatted_Name__c</field>
+        <value xsi:type="xsd:string">Hard Coded URLs</value>
+    </values>
+    <values>
+        <field>Recommendation_Text__c</field>
+        <value xsi:type="xsd:string">Ask your Salesforce developer to change these URL references. After you change the URL references, consider enabling My Domain to personalize Salesforce for your company. We don’t check for hard-coded URLs in package or feature integrations, workflows, Chatter posts, content URLs, Salesforce documents, or static content.</value>
+    </values>
+    <values>
+        <field>Result_Text__c</field>
+        <value xsi:type="xsd:string">You have {X} hard-coded URLs. Hard-coded URLs can cause links to break.</value>
+    </values>
+</CustomMetadata>

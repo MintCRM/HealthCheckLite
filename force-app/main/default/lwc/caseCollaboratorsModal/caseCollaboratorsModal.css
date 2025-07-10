@@ -1,0 +1,80 @@
+.rowResult{
+    border: 1px solid #C9C9C9; 
+    border-radius: 4px; 
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 3px;
+}
+
+.rowResult:hover{
+    background-color: #D9FFF9;
+}
+
+.searchResultsHeader{
+    width: 100%; 
+    color: white; 
+    background-color: #05C9DB; 
+    border-radius: 4px; 
+    padding: 8px 0px 8px 2px; 
+    margin-bottom: 3px;
+}
+
+.promptBox{
+    background-color: #EBFFFC; 
+    border: 2px #05C9DB dashed; 
+    border-radius: 6px; 
+    padding: 30px; 
+    margin: 15px; 
+    text-align:center;
+}
+
+.descriptionBox{
+    background-color: #575757; 
+    /* border: 2px #575757 dashed;  */
+    color: white;
+    border-radius: 6px; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+    /* text-align:center; */
+}
+
+.slds-pill__label{
+    color: #0C064D;
+}
+
+.slds-pill__label:hover{
+    color: #05C9DB;
+}
+
+.keyAccountCollab{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.keyManualCollab{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    background-color: #dbdbdb;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.keyExcludedCollab{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    background-color: #c78585;
+    padding-left: 4px;
+    padding-right: 4px;
+
+}
+
+.bouncedCollab{
+    border: 1px solid #c78585;
+    border-radius: 4px;
+    background-color: white;
+    color: #c78585;
+    padding-left: 4px;
+    padding-right: 4px;
+}

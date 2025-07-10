@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>MultipleApexTriggersPerObject</label>
+    <protected>true</protected>
+    <values>
+        <field>Formatted_Name__c</field>
+        <value xsi:type="xsd:string">Multiple Apex Triggers Per Object</value>
+    </values>
+    <values>
+        <field>Recommendation_Text__c</field>
+        <value xsi:type="xsd:string">If an object contains multiple triggers, consolidate them into a single trigger. If coding isn’t your thing, use the Lightning Process Builder to consolidate triggers. We filtered out triggers from apps that you downloaded from AppExchange and other managed packages.</value>
+    </values>
+    <values>
+        <field>Result_Text__c</field>
+        <value xsi:type="xsd:string">You have {X} object that contains multiple triggers. Having more than one trigger on an object can cause you to reach Apex limits. Triggers can also execute in a random order.</value>
+    </values>
+</CustomMetadata>

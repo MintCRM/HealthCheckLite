@@ -1,0 +1,72 @@
+<template>
+    <div class="slds-page-header slds-page-header_record-home"
+    style="padding-bottom: 1px; border: 1px solid #CDCDCD; border-radius: 0.25rem;">
+        <div class="slds-page-header__row slds-var-p-bottom_small">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-opportunity">
+                        <lightning-icon icon-name="standard:budget_period"></lightning-icon>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <div class="slds-page-header__name">
+                        <div class="slds-page-header__name-title">
+                            <h1>
+                                <span 
+                                    class="slds-page-header__title slds-truncate" 
+                                    style="margin-top: -5px;"
+                                    title="Mint History Related List">
+                                        Mint History Tracking
+                                    </span>
+                                <span style="font-size:small; margin-top:-5px;">
+                                    <i>Showing first 30 records</i>
+                                </span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="slds-page-header__col-actions">
+                <div class="slds-page-header__controls">
+                    <template lwc:if={get_checkForData}>
+                        <lightning-button 
+                            label="View All" 
+                            title="View All"
+                            onclick={openModal}
+                            icon-name="utility:new_window" 
+                            class="slds-m-left_x-small">
+                        </lightning-button>
+                    </template>
+                    <template lwc:else>
+                        {get_countOfRecords}
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div class="slds-page-header__row slds-page-header__row_gutters slds-scrollable_y" 
+        style="max-height: 400px;">
+            <div class="slds-scrollable_y" style="width: 100%;">
+                <template lwc:if={get_checkForData}>
+                    <lightning-datatable
+                        key-field="id"
+                        data={dataFirst30}
+                        columns={columns}
+                        hide-checkbox-column
+                        style="width: 100%; height: 100%">
+                    </lightning-datatable>
+                </template>
+                <template lwc:else>
+                    <div class="promptBox">
+                        No History Found for this record
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+    </div>
+</template>

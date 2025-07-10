@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>NotesandAttachmentsRelatedList</label>
+    <protected>true</protected>
+    <values>
+        <field>Formatted_Name__c</field>
+        <value xsi:type="xsd:string">Notes And Attachments Related List</value>
+    </values>
+    <values>
+        <field>Recommendation_Text__c</field>
+        <value xsi:type="xsd:string">Convert your existing notes and attachments to Salesforce Files with the Attachments to Files app. Then, on all your page layouts, replace the Notes and Attachments related list with the Files related list.
+In Lightning Experience, existing attachments in the Notes and Attachments related list are read only, and which actions users can take is limited. New attachments are uploaded as Files. The Files related list offers improved functionality, and it will eventually replace the Notes and Attachments related list.</value>
+    </values>
+    <values>
+        <field>Result_Text__c</field>
+        <value xsi:type="xsd:string">You have {X} page layouts that use the Notes and Attachments related list.</value>
+    </values>
+</CustomMetadata>

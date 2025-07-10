@@ -1,0 +1,374 @@
+<template>
+    <lightning-modal-header label={modalTitle} style="coloR: #0C064D;"></lightning-modal-header>
+    
+    <lightning-modal-body>
+        <!-- <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template> -->
+
+        <!-- <template if:false={isLoading}> -->
+            <template if:true={boolean_showDescription}>
+                <div class="descriptionBox">
+                    {descriptionText}
+                </div>
+            </template>
+
+            <lightning-messages></lightning-messages>
+            
+            <!-- COLLAB SEARCH SCREEN -->
+            <template if:true={isSearchAddCollabs}>
+                <template if:true={boolean_arrayData}>
+                    <div class="slds-grid slds-grid_vertical-align-center searchResultsHeader">
+                        <div class="slds-col slds-size_5-of-12 slds-truncate slds-var-p-left_xx-small">
+                            <b>Name</b>
+                        </div>
+                        <div class="slds-size_5-of-12 slds-col_bump-right slds-truncate">
+                            <b>Email</b>
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                    <div style="min-height: 300px; max-height: 500px;" class="slds-scrollable_y">
+                        <template for:each={_arrayData} for:item="record">
+                            <div key={record.Id}
+                                class="rowResult">
+                                <div class="slds-grid slds-grid_vertical-align-center" style="width: 100%;">
+                                    <div class="slds-col slds-size_5-of-12 slds-truncate">
+                                        {record.Name}
+                                    </div>
+                                    <div class="slds-size_5-of-12 slds-col_bump-right slds-truncate">
+                                        {record.Email}
+                                    </div>
+                                    <template if:false={record.IsEmailBounced}>
+                                        <div>
+                                            <lightning-button-icon 
+                                            icon-name="utility:add"
+                                            size="small" 
+                                            variant="border-filled"
+                                            alternative-text="Add Contact as Collaborator"
+                                            recordid={record.Id}
+                                            onclick={addCollaborator}
+                                            disabled={record.added}>
+                                            </lightning-button-icon>
+                                        </div>
+                                    </template>
+                                    <template if:true={record.IsEmailBounced}>
+                                        <span class="bouncedCollab">
+                                            BOUNCED
+                                        </span>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={boolean_arrayData}>
+                    <div class="promptBox">
+                        No Contacts have been found within this Case's Account using your search criteria.
+                    </div>
+                </template>
+            </template>
+
+
+
+            <!-- EXCLUDE COLLAB SCREEN -->
+            <template if:true={isExcludeCollabs}>
+                <template if:true={boolean_arrayData}>
+                    <div class="slds-grid slds-grid_vertical-align-center searchResultsHeader">
+                        <div class="slds-col slds-size_9-of-12 slds-truncate slds-var-p-left_xx-small">
+                            <b>Collaborator Email</b>
+                        </div>
+                        <div class="slds-col_bump-right slds-truncate">
+                            <b>Manually Added</b>
+                        </div>
+                        <div class="slds-var-p-right_x-small">
+                            <b>Exclude</b>
+                        </div>
+                    </div>
+                    <div style="min-height: 300px; max-height: 500px;" class="slds-scrollable_y">
+                        <template for:each={_arrayData} for:item="record">
+                            <div key={record.Id}
+                                style="border: 1px solid #C9C9C9; 
+                                border-radius: 4px; 
+                                background-color: white;
+                                padding: 5px;
+                                margin-bottom: 3px;">
+                                <div class="slds-grid slds-grid_vertical-align-center" style="width: 100%;">
+                                    <div class="slds-col slds-size_9-of-12 slds-truncate">
+                                        {record.mint__Collaborators_Email__c}
+                                    </div>
+                                    <div class="slds-col_bump-right slds-truncate">
+                                        <template if:true={record.mint__Manually_Added__c}>
+                                            <lightning-icon icon-name="utility:success" 
+                                                alternative-text="Manaually Added" 
+                                                title="Manually Added"
+                                                size="small">
+                                            </lightning-icon>
+                                        </template>
+                                        <template if:false={record.mint__Manually_Added__c}>
+                                            <lightning-icon icon-name="utility:clear" 
+                                                alternative-text="Not Manually Added" 
+                                                title="Not Manaually Added"
+                                                size="small">
+                                            </lightning-icon>
+                                        </template>
+                                    </div>
+                                    <div>
+                                        <lightning-input 
+                                            type="toggle" 
+                                            name="input1"
+                                            variant="label-hidden"
+                                            message-toggle-active=""
+                                            message-toggle-inactive=""
+                                            checked={record.mint__Excluded__c}
+                                            recordid={record.Id}
+                                            onchange={toggleRecord}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={boolean_arrayData}>
+                    <div class="promptBox">
+                        No Collaborators exist againt this Case as of yet.
+                    </div>
+                </template>
+            </template>
+
+
+            <!-- ADD AD-HOC EMAIL COLLABORATOR -->
+            <template if:true={isAddAdhocCollab}>
+
+                <div style="min-height: 300px; max-height: 500px;" class="slds-scrollable_y">
+                    <!-- <div class="slds-grid slds-gutters slds-wrap"> -->
+                        <lightning-input 
+                            type="email" 
+                            label="Ad-Hoc Collaborator's Email" 
+                            placeholder="type here..." 
+                            class="slds-var-m-horizontal_xx-large slds-var-m-top_small"
+                            max-length="80"
+                            data-id="emailInput"
+                            required>
+                        </lightning-input>
+
+                        <lightning-textarea
+                            type="text"
+                            label="Collaborator Note"
+                            class="slds-var-m-horizontal_xx-large slds-var-m-top_medium"
+                            data-id="notesInput"
+                            value=""
+                            variant="standard"
+                            onchange={collabNoteCount}
+                            max-length="10000"
+                            lwc:ref="notesField"
+                            >
+                        </lightning-textarea>
+                    <!-- </div> -->
+                    <p style="float: right; padding-bottom: 15px;" class="slds-var-m-horizontal_xx-large">
+                        <span><span lwc:ref="charCount">10000</span> / 10000 Characters Remaining</span>
+                    </p>
+                </div>
+    
+            </template>
+
+
+
+            <!-- ABOUT TOOL -->
+            <template if:true={isAboutTool}>
+
+                <div style="min-height: 300px; max-height: 500px;" class="slds-scrollable_y">
+                    <lightning-accordion class="example-accordion">
+                        <lightning-accordion-section name="A" label="Search & Add Collaborators">
+                            <p>The <b>Search & Add Collaborators</b> search bar will allow you to search 
+                            for existing Contacts against the Case's Account record.</p>
+
+                            <br/>
+                            <lightning-input
+                                name="enter-search"
+                                placeholder="Search & Add Collaborators... [Hit Enter]"
+                                type="search"
+                                variant="label-hidden"
+                            ></lightning-input>
+                            <br/>
+                                
+                            <p>When a Contact is added to the Case, these Case Collaborators are only added to this particular Case.
+                                The Contacts are added with the 'Manually Added' checkbox set to True to indicate that 
+                                the Contact was added manually to this Case, and not automatically added because they are 
+                                marked as Collaborators on their Contact Record. Manually Added Collaboratos will appear grey within
+                                the Case Collaborator Tool.
+                            </p>
+                            <br/>
+                            <p>Contacts added to the Callaborator Tool for Cases will be incuded within Case Emails as CC Contacts.</p>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="B" label="Removing Case Collaborators">
+                            <p>Case Collaborators are shown on the Case Collaborator Tool as Pills.</p>
+                            <br/>
+                            <p>Each Callaborator can be removed easily by hitting the 'X' on the right-hand side of each Pill.
+                                A dialigue will be shown to confirm the deletion. Once deleted, the Collaborator is removed from the Calloborator Tool
+                                and will not be included within Case Emails.
+                            </p>
+                            <br/>
+                            <span class="slds-pill slds-pill_link slds-var-m-bottom_xx-small slds-var-m-horizontal_xxx-small">
+                                <span class="slds-pill__icon_container slds-var-m-left_xxx-small">
+                                        <lightning-icon icon-name="utility:email"></lightning-icon>
+                                </span>
+                                <a href="#" class="slds-pill__action slds-truncate">
+                                    <span class="slds-pill__label">ExampleEmail@Mail.com</span>
+                                </a>
+                                <button class="slds-button slds-button_icon slds-button_icon slds-pill__remove" title="Remove">
+                                    <lightning-icon 
+                                        icon-name="utility:close"
+                                        >
+                                    </lightning-icon>
+                                    <span class="slds-assistive-text">Remove</span>
+                                </button>
+                            </span>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="Bb" label="Changing Case Account Lookup">
+                            <p>Changing the Account Lookup on the Case record will re-trigger a Case Callaborator refresh</p>
+                            <p>(A page refresh may be required to see the changes!)
+                            </p>
+                            <br/>
+                            <p>On changing of the Account Lookup, all Case Collaborators (except manually added callaborators)
+                                will be removed, and replaces by Case Callaborators on the new Account assigned to the Case.
+                            </p>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="C" label="Action Menu">
+                            <p>The Action Menu hold additional actions all in one place:</p>
+                            <br/>
+                            <lightning-button-menu 
+                                alternative-text="Show Menu" 
+                                tooltip="Show Menu"  
+                                menu-alignment="left" 
+                                icon-name="utility:apps" 
+                                class="slds-m-left_xx-large">
+                                <lightning-menu-item 
+                                    icon-name="utility:leave_conference"
+                                    value="manageExclusions" 
+                                    label="Manage Exclusions">
+                                </lightning-menu-item>
+                                <lightning-menu-item 
+                                    icon-name="utility:add"
+                                    value="adHocCollaborator" 
+                                    label="Add Ad-hoc Collaborator (Email)">
+                                </lightning-menu-item>
+                                <lightning-menu-item 
+                                    icon-name="utility:question_mark"
+                                    value="aboutTool" 
+                                    label="About this Tool">
+                                </lightning-menu-item>
+                            </lightning-button-menu>
+                            <br/><br/>
+                            <p>Each item will open a Modal Pop-up Window. These actions are expanded upon in the below sections. </p>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="D" label="Manage Exclusions">
+                            <p>This action allows the user to quickly and easily toggle off Collaborators, 
+                                excluding them from Case Emails for this Case. This does not exclude the Collaborator
+                                from other Cases they are associated with. 
+                            </p>
+                            <br/>
+                            <p>Collaborators can be Toggled On (Excluded) and Toggled Off (Included) as and when required.</p>
+                            <br/>
+                            <p>Excluded Collaborators are highlighted red on the Collaborator Tool.</p>
+                            <br/>
+                            <p>If an email address is added to the CC field when composing an email which is marked as an Exclusion in the Collaborators list, this email will be stripped out of the email before it is sent automatically.</p>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="E" label="Add Ad-hoc Case Collabrator Email">
+                            <p>This action allows you to add an Ad-hoc Email to the Case as a Collaborator, providing 
+                                the email address provided does not already exist in the Collaboratoes List.</p>
+                            <br/> 
+                            <p>This is useful if you would like to include some within the Case Communications who does not 
+                                exist within Salesforce as a Contact against the Case Account.</p>
+                            <br/>
+                            <p>These Ad-hoc Collaborators will have the 'Manually Added' checkbox set to True and appear grey
+                                in the Case Collaborator Tool
+                            </p>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="F" label="Case Collaborator Colour Key">
+                            <div class="slds-card__footer slds-align_absolute-center" style="display: table;">  
+                                <div class="keyAccountCollab" 
+                                    title="A Collaborator from this Cases Account. Automatically added as a Collaorator to each Case."
+                                    style="display: table-cell;"
+                                    >
+                                    Account Collaborator
+                                </div>
+                                &ThickSpace;
+                                <div class="keyManualCollab" 
+                                    title="A Collaborator that has been manually added to this Case. This does not affect other Cases"
+                                    style="display: table-cell;"
+                                    >
+                                    Manually Added to Case
+                                </div>
+                                &ThickSpace;
+                                <div class="keyExcludedCollab" 
+                                    title="A Collaborator that has been Excluded from this Case's Emails"
+                                    style="display: table-cell;"
+                                    >
+                                    Excluded Collaborator
+                                </div>
+                            </div>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="G" label="Case Collaborator Limits">
+                            <p>The maximum number of Collaborators allowed on a Case is 25. This is a Salesforce limit in that only 25 emails can be included within the CC Field of an email. 
+                            </p>
+                            <br/>
+                            <p>The Collaborator Tool provides a count of collaborators, and also provides feedback to the user when approaching the limit.</p>
+                            <br/>
+                            <p>If you have all 25 Collaborator spots allocated, and also add additional emails directly into the CC field when composing the email,
+                                the email will be sent to the first 25 CC addresses, meaning that some collaborators could be missed off the email. 
+                                The Collaborator Tool will advise of this, when close to the 25 limit.
+                            </p>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="H" label="Developed By">
+                            <br/>
+                            <!-- MintCRM Logo -->
+                            <div style="width:130px; height:40px; text-align: center; margin-top:auto; margin-bottom:auto;">
+                                <a href="https://www.mintcrm.co.uk" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    version="1.1" 
+                                    width="100%" 
+                                    height="100%"
+                                    viewBox="5000 0 5000 5000" 
+                                    preserveAspectRatio="xMaxYmax"
+                                    style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g><path style="opacity:0.999" fill="#04efcd" d="M 2070.5,-0.5 C 2071.83,-0.5 2073.17,-0.5 2074.5,-0.5C 2764.23,416.034 3454.4,832.034 4145,1247.5C 4145.17,1661.5 4145.33,2075.5 4145.5,2489.5C 4145.33,2903.5 4145.17,3317.5 4145,3731.5C 3454.69,4147.4 2764.52,4563.4 2074.5,4979.5C 2073.17,4979.5 2071.83,4979.5 2070.5,4979.5C 1380.37,4563.26 690.035,4147.26 -0.5,3731.5C -0.5,2903.5 -0.5,2075.5 -0.5,1247.5C 690.035,831.737 1380.37,415.737 2070.5,-0.5 Z M 2071.5,460.5 C 2277.78,583.974 2483.78,707.974 2689.5,832.5C 2483.9,956.884 2278.07,1080.88 2072,1204.5C 1866.1,1080.8 1660.27,956.966 1454.5,833C 1660.23,708.808 1865.9,584.641 2071.5,460.5 Z M 1874.5,1547.5 C 1874.83,1695.24 1874.5,1842.9 1873.5,1990.5C 1715.03,2085.57 1556.7,2180.9 1398.5,2276.5C 1063.67,2075.25 729.001,1873.75 394.5,1672C 393.336,1605.24 393.169,1538.4 394,1471.5C 620.702,1334.63 847.535,1197.97 1074.5,1061.5C 1074.17,1062.66 1074.17,1064 1074.5,1065.5C 1341.19,1226.18 1607.86,1386.84 1874.5,1547.5 Z M 3069.5,1062.5 C 3069.9,1061.47 3070.56,1061.31 3071.5,1062C 3297.33,1198.42 3523.33,1334.58 3749.5,1470.5C 3750.83,2149.83 3750.83,2829.17 3749.5,3508.5C 3256.25,3805.37 2763.08,4102.37 2270,4399.5C 2269.17,4211.83 2269.33,4024.17 2270.5,3836.5C 2494.92,3701.88 2719.08,3566.88 2943,3431.5C 2943.67,3086.17 2943.67,2740.83 2943,2395.5C 2718.67,2260.17 2494.33,2124.83 2270,1989.5C 2269.33,1842.17 2269.33,1694.83 2270,1547.5C 2536.42,1386.71 2802.92,1226.04 3069.5,1065.5C 3070.78,1064.39 3070.78,1063.39 3069.5,1062.5 Z M 393.5,2133.5 C 662.443,2294.64 931.11,2456.31 1199.5,2618.5C 1200.17,2889.5 1200.83,3160.5 1201.5,3431.5C 1425.5,3566.5 1649.5,3701.5 1873.5,3836.5C 1874.67,4024.17 1874.83,4211.83 1874,4399.5C 1380.67,4102.17 887.333,3804.83 394,3507.5C 393.5,3049.5 393.333,2591.5 393.5,2133.5 Z M 2070.5,2332.5 C 2071.87,2332.34 2073.21,2332.51 2074.5,2333C 2232.33,2428.42 2390.33,2523.58 2548.5,2618.5C 2549.83,2814.83 2549.83,3011.17 2548.5,3207.5C 2389.75,3303.29 2230.92,3398.96 2072,3494.5C 1913.5,3398.58 1754.83,3302.92 1596,3207.5C 1595.17,3011.17 1595.33,2814.83 1596.5,2618.5C 1754.8,2523.5 1912.8,2428.17 2070.5,2332.5 Z"/></g>
+                                        <g><path style="opacity:0.999" fill="#003868" d="M 8726.5,848.5 C 8872.5,848.333 9018.5,848.5 9164.5,849C 9212.57,851.108 9244.74,874.608 9261,919.5C 9262.72,925.752 9264.05,932.086 9265,938.5C 9266.66,1930.48 9267,2922.48 9266,3914.5C 9263.66,3951.03 9247.49,3979.53 9217.5,4000C 9205.14,4007.45 9191.8,4012.12 9177.5,4014C 9100.19,4015.15 9022.85,4015.65 8945.5,4015.5C 8871.17,4015.33 8796.83,4015.17 8722.5,4015C 8679.89,4009.72 8649.72,3987.55 8632,3948.5C 8628.41,3939.49 8626.08,3930.16 8625,3920.5C 8624.33,2927.83 8624.33,1935.17 8625,942.5C 8631.95,895.217 8658.45,865.051 8704.5,852C 8711.93,850.501 8719.26,849.334 8726.5,848.5 Z"/></g>
+                                        <g><path style="opacity:0.999" fill="#003968" d="M 5241.5,849.5 C 5371.83,849.333 5502.17,849.5 5632.5,850C 5684.32,855.638 5722.15,881.471 5746,927.5C 6037.25,1472.33 6328.75,2016.99 6620.5,2561.5C 6914.59,2018.33 7208.42,1474.99 7502,931.5C 7518.28,899.89 7542.44,876.39 7574.5,861C 7588.31,855.298 7602.64,851.631 7617.5,850C 7746.5,849.333 7875.5,849.333 8004.5,850C 8053.05,857.212 8084.21,884.379 8098,931.5C 8099.43,938.102 8100.43,944.768 8101,951.5C 8101.67,1940.17 8101.67,2928.83 8101,3917.5C 8095.9,3966.94 8069.4,3998.44 8021.5,4012C 8015.56,4013.39 8009.56,4014.39 8003.5,4015C 7867.5,4015.67 7731.5,4015.67 7595.5,4015C 7559.1,4009.58 7531.6,3991.08 7513,3959.5C 7506.59,3947.61 7502.59,3934.94 7501,3921.5C 7500.67,3264.83 7500.33,2608.17 7500,1951.5C 7291.33,2350.17 7082.67,2748.83 6874,3147.5C 6854.86,3185.64 6827.02,3215.81 6790.5,3238C 6770.14,3248.67 6748.48,3254.67 6725.5,3256C 6657.17,3256.67 6588.83,3256.67 6520.5,3256C 6474.43,3252.38 6436.26,3233.21 6406,3198.5C 6393.52,3183.54 6382.52,3167.54 6373,3150.5C 6164.4,2750.92 5955.4,2351.58 5746,1952.5C 5745.67,2607.17 5745.33,3261.83 5745,3916.5C 5741.85,3953.61 5724.69,3982.11 5693.5,4002C 5680.37,4009.12 5666.37,4013.45 5651.5,4015C 5515.17,4015.67 5378.83,4015.67 5242.5,4015C 5194.62,4010.1 5163.12,3984.93 5148,3939.5C 5146.74,3933.88 5145.74,3928.21 5145,3922.5C 5144.33,2930.5 5144.33,1938.5 5145,946.5C 5154.02,890.984 5186.18,858.651 5241.5,849.5 Z"/></g>
+                                        <g><path style="opacity:0.999" fill="#003968" d="M 9886.5,849.5 C 10014.8,849.333 10143.2,849.5 10271.5,850C 10298.5,851.321 10322.2,860.654 10342.5,878C 10355.4,889.932 10367.3,902.766 10378,916.5C 10390.3,935.5 10402.7,954.5 10415,973.5C 10836.7,1630.83 11258.3,2288.17 11680,2945.5C 11680.3,2280.5 11680.7,1615.5 11681,950.5C 11684,909.196 11703.5,878.696 11739.5,859C 11750.3,854.162 11761.7,851.162 11773.5,850C 11910.5,849.333 12047.5,849.333 12184.5,850C 12240.4,858.949 12272.6,891.449 12281,947.5C 12281.7,1937.5 12281.7,2927.5 12281,3917.5C 12275.2,3961.25 12252.1,3991.75 12211.5,4009C 12202.4,4012.26 12193.1,4014.26 12183.5,4015C 12058.5,4015.67 11933.5,4015.67 11808.5,4015C 11776,4011.94 11747.3,3999.94 11722.5,3979C 11704.8,3962.93 11689.6,3944.76 11677,3924.5C 11249.4,3271 10822.1,2617.34 10395,1963.5C 10394.7,2616.5 10394.3,3269.5 10394,3922.5C 10384.6,3977.58 10352.1,4008.41 10296.5,4015C 10160.5,4015.67 10024.5,4015.67 9888.5,4015C 9842.32,4007.16 9811.82,3980.99 9797,3936.5C 9795.74,3930.88 9794.74,3925.21 9794,3919.5C 9793.33,2928.83 9793.33,1938.17 9794,947.5C 9800.83,891.844 9831.66,859.177 9886.5,849.5 Z"/></g>
+                                        <g><path style="opacity:0.999" fill="#003968" d="M 15079.5,945.5 C 15079.5,1067.83 15079.5,1190.17 15079.5,1312.5C 15072.9,1351.65 15051.5,1379.82 15015.5,1397C 15006.1,1400.76 14996.5,1403.42 14986.5,1405C 14703.2,1406.49 14419.8,1406.99 14136.5,1406.5C 14136.7,2243.83 14136.5,3081.17 14136,3918.5C 14129.1,3965.16 14103.2,3995.99 14058.5,4011C 14050.6,4012.98 14042.6,4014.32 14034.5,4015C 13888.8,4015.67 13743.2,4015.67 13597.5,4015C 13554.9,4009.72 13524.7,3987.55 13507,3948.5C 13503.6,3939.79 13501.2,3930.79 13500,3921.5C 13499.5,3083.17 13499.3,2244.83 13499.5,1406.5C 13218.5,1406.67 12937.5,1406.5 12656.5,1406C 12613.3,1401.5 12582.5,1379.66 12564,1340.5C 12560.7,1332.08 12558.4,1323.42 12557,1314.5C 12555.4,1194.52 12555,1074.52 12556,954.5C 12557.9,909.265 12579.1,876.765 12619.5,857C 12628.9,853.566 12638.6,851.233 12648.5,850C 13426.5,849.333 14204.5,849.333 14982.5,850C 15037.6,858.915 15069.9,890.748 15079.5,945.5 Z"/></g>
+                                        <g><path style="opacity:0.125" fill="#08efcf" d="M 1874.5,1547.5 C 1875.17,1621.17 1875.5,1695 1875.5,1769C 1875.5,1843.17 1874.83,1917 1873.5,1990.5C 1874.5,1842.9 1874.83,1695.24 1874.5,1547.5 Z"/></g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </div>
+    
+            </template>
+
+        <!-- </template> -->
+
+        
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button label="Close" onclick={handleClose}></lightning-button>
+        <template if:true={isDeleteRecord}>
+            <lightning-button label="Remove Collaborator" variant="destructive" onclick={removeRecord} class="slds-var-m-left_xx-small"></lightning-button>
+        </template>
+        <template if:true={isAddAdhocCollab}>
+            <lightning-button label="Add Ad-hoc Collaborator" variant="success" onclick={addAdhocCollab} class="slds-var-m-left_xx-small"></lightning-button>
+        </template>
+    </lightning-modal-footer>
+</template>

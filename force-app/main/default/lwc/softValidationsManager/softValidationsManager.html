@@ -1,0 +1,352 @@
+<template>
+    <img src={logo}>
+    <!-- MintCRM Logo -->
+    <div class="poweredBy" style="float: right;">
+        <span>Powered By: </span>
+        <a href="https://www.mintcrm.co.uk/" target="_blank">
+        <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" width="30" height="20">
+            <rect class="sh-twenty" width="30" height="10" fill="#9de0d4" />
+            <polygon class="polyone" points="60 0 60 30 50 30 50 20 40 20 40 10 50 10 50 0 60 0" fill="#26dac9"></polygon>
+            <polygon class="sh-ten"  points="40 20 40 30 20 30 20 20 10 20 10 10 30 10 30 20 40 20" fill="#06496c"></polygon>
+            <polygon class="sh-twenty" points="30 30 30 40 0 40 0 20 10 20 10 30 30 30" fill="#ccf1e4"></polygon>
+            <rect class="sh-ten" x="40" y="30" width="10" height="10" fill="#9de0d4"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.71 26.36" height="20">
+            <path d="M.06,25,6.81,1.4A1.9,1.9,0,0,1,8.6,0h2.58a1.54,1.54,0,0,1,1.6,1.33L15,13.65c.16.9.27,2.15.39,3.39A32.56,32.56,0,0,1,17,13.65l6.67-12.4a2.24,2.24,0,0,1,2-1.25h2.61a1.17,1.17,0,0,1,1.29,1.33L28,25a1.38,1.38,0,0,1-1.48,1.4h-1.8c-.82,0-1.32-.46-1.25-1.48l1.1-14.15c.07-1.21.27-2.85.46-4.45-.7,1.6-1.4,3.24-2,4.41l-5.27,9.75a2.09,2.09,0,0,1-1.87,1.21H13.4a1.53,1.53,0,0,1-1.52-1.41l-1.75-9.55a39.22,39.22,0,0,1-.55-4.41c-.35,1.64-.7,3.24-1,4.45L4.59,25a1.68,1.68,0,0,1-1.68,1.32H1.08A1,1,0,0,1,.06,25Z" fill="#00486e"/>
+            <path d="M34.15,1.36A1.29,1.29,0,0,1,35.51,0h2a1.29,1.29,0,0,1,1.37,1.36V25a1.29,1.29,0,0,1-1.37,1.36h-2A1.29,1.29,0,0,1,34.15,25Z" fill="#00486e"/>
+            <path d="M44.83,1.36A1.29,1.29,0,0,1,46.2,0h1.29a2.15,2.15,0,0,1,1.87,1.25l9.51,15.87c-.07-1.44-.11-2.81-.11-3.9V1.36A1.29,1.29,0,0,1,60.12,0h2a1.29,1.29,0,0,1,1.37,1.36V25a1.29,1.29,0,0,1-1.37,1.36H60.75a2.19,2.19,0,0,1-1.91-1.24L49.36,9.4c.12,1.48.15,2.89.15,4V25a1.28,1.28,0,0,1-1.36,1.36H46.2A1.29,1.29,0,0,1,44.83,25Z" fill="#00486e"/>
+            <path d="M74.28,4.06H68.9a1.3,1.3,0,0,1-1.37-1.37V1.36A1.29,1.29,0,0,1,68.9,0H84.34a1.29,1.29,0,0,1,1.37,1.36V2.69a1.3,1.3,0,0,1-1.37,1.37H79V25a1.29,1.29,0,0,1-1.37,1.36h-2A1.29,1.29,0,0,1,74.28,25Z" fill="#00486e"/>
+        </svg>
+        </a>
+    </div>
+    <template if:true={loading}>
+        <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    <lightning-tabset variant="vertical">
+
+        <lightning-tab label="Manage Validations" icon-name="utility:rows" icon-size="small" style="min-height: 600px;">
+
+            <template if:false={showCreateNewValidation}>
+                <div class="slds-p-bottom_xxx-small">
+                    <lightning-button label="Add a New Validation" variant="brand-outline" icon-name="utility:add" onclick={toggleValidationCreation}></lightning-button>
+                </div>
+            </template>
+            <template if:true={showCreateNewValidation}>
+                <div class="slds-card">
+                    <div class="slds-p-around_x-small">
+                        <lightning-layout vertical-align="top">
+                            <lightning-layout-item size="2" class="slds-p-left_xx-small">
+                                <lightning-combobox name="Object"
+                                        label="Select Object"
+                                        value={selectedSobject}
+                                        placeholder="Select Object"
+                                        options={objectPicklistOptions}
+                                        onchange={handleSobjectChange}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="1" class="slds-p-left_x-small">
+                                <lightning-combobox
+                                        name="Style"
+                                        label="Select Style"
+                                        value={selectedStyle}
+                                        placeholder="Select Style"
+                                        options={validationStyles}
+                                        onchange={handleStyleChange}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-left_x-small">
+                                <lightning-textarea label="Title" value={title} onchange={handleTitleChange} placeholder="Mobile is Empty!" maxlength="100"></lightning-textarea>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-left_x-small">
+                                <lightning-textarea label="Message" value={message} onchange={handleMessageChange} placeholder="Enter Mobile ASAP" maxlength="400"></lightning-textarea>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-left_x-small">
+                                <lightning-textarea label="Where Clause" value={whereClause} onchange={handleWhereClauseChange} placeholder="MobilePhone = null AND ..." field-level-help="Enter your WHERE clause in SOQL (excluding the word 'WHERE')" maxlength="500"></lightning-textarea>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="1" class="slds-p-left_x-small">
+                                <lightning-input label="Position" value={position} onchange={handlePositionChange} placeholder="1" field-level-help="Depicts the order in which validations messages will appear if there are >1 per object" maxlength="2"></lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto" class="slds-p-left_x-small slds-p-right_xxx-small">
+                                <div class="slds-text-align_right slds-var-m-top_large">
+                                    <div class="slds-grid slds-grid_align-end">
+                                        <div class="slds-col slds-grow-none">
+                                            <lightning-button label="Add" variant="brand-outline" icon-name="utility:add" onclick={createValidation}></lightning-button>
+                                        </div>
+                                        <div class="slds-col slds-grow-none slds-p-left_xx-small">
+                                            <lightning-button-icon variant="brand-outline" icon-name="utility:close" onclick={toggleValidationCreation}></lightning-button-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+            </template>
+            <template if:true={createValitionPrompt}>
+                <p style="text-align:right; font-size:large;">
+                    <lightning-badge class="selectLocationPrompt" label="Please populate all fields in order to save your softValidation" icon-name="utility:info" icon-size="x-large"></lightning-badge>
+                </p>
+            </template>
+            <br />
+            <div class="slds-scrollable_y">
+                <template if:true={foundValidationRecords}>
+                    <lightning-layout vertical-align="center" class="validationTableHeader">
+                        <lightning-layout-item size="2" class="slds-p-left_xx-small">
+                            Object
+                        </lightning-layout-item>
+                        <lightning-layout-item size="1" class="slds-p-left_xx-small">
+                            Style
+                        </lightning-layout-item>
+                        <lightning-layout-item size="2" class="slds-p-left_x-small">
+                            Title
+                        </lightning-layout-item>
+                        <lightning-layout-item size="2" class="slds-p-left_x-small">
+                            Message
+                        </lightning-layout-item>
+                        <lightning-layout-item size="2" class="slds-p-left_x-small">
+                            Where Clause
+                        </lightning-layout-item>
+                        <lightning-layout-item size="1" class="slds-p-left_x-small">
+                            Position
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" class="slds-p-left_x-small slds-p-right_xx-small">
+                            <div class="slds-text-align_right">Actions</div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <template for:each={existingValidations} for:item="val">
+                        <lightning-layout key={val.record.Id} class={val.style}>
+                            <lightning-layout-item size="2" class="slds-p-left_xx-small">
+                                <div class="textWrap"><b>{val.record.Object__c}</b></div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="1" class="slds-p-left_xx-small">
+                                <lightning-combobox
+                                        name="Style"
+                                        value={val.record.Validation_Style__c}
+                                        placeholder="Select Style"
+                                        options={validationStyles}
+                                        onchange={updateStyle}
+                                        data-record-id={val.record.Id}
+                                        variant="label-hidden"
+                                        required>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-left_x-small">
+                                <lightning-textarea value={val.record.Title__c} name="styleInput" type="text" maxlength="100" variant="label-hidden" onchange={updateTitle} data-record-id={val.record.Id} required></lightning-textarea>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-left_x-small">
+                                <lightning-textarea value={val.record.Message__c} name="styleInput" type="text" maxlength="400" variant="label-hidden" onchange={updateMessage} data-record-id={val.record.Id}></lightning-textarea>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-left_x-small">
+                                <lightning-textarea value={val.record.Where_Clause__c} name="styleInput" type="text" maxlength="500" variant="label-hidden" onchange={updateWhereClause} data-record-id={val.record.Id} required></lightning-textarea>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="1" class="slds-p-left_x-small">
+                                <lightning-input value={val.record.Position__c} name="styleInput" type="number" maxlength="2" variant="label-hidden" onchange={updatePosition} data-record-id={val.record.Id} required></lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto" class="slds-p-left_small">
+                                <div class="slds-grid slds-grid_align-end">
+                                    <div class="slds-col slds-grow-none">                                 
+                                        <lightning-input type="toggle" name="activeInput" checked={val.record.Active__c} onchange={updateValidationToggle} data-record-id={val.record.Id}></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-grow-none slds-var-p-left_xx-small">
+                                        <lightning-button-icon icon-name="action:clone" variant="brand-outline" alternative-text="Duplicate Validation" title="Duplicate" onclick={cloneValidation} data-record-id={val.record.Id}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-col slds-grow-none slds-var-p-left_xx-small">
+                                        <lightning-button-icon icon-name="action:delete" variant="brand-outline" alternative-text="Delete Validation" title="Delete" onclick={removeValidation} data-record-id={val.record.Id}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </template>
+                </template>
+                <template if:false={foundValidationRecords}>
+                    <p style="text-align:center; font-size:large; margin-top: 100px; margin-bottom: 100px;">
+                        <lightning-badge class="selectLocationPrompt" label="No softValidation records found. Please create one" icon-name="utility:info" icon-size="x-large"></lightning-badge>
+                    </p>
+                </template> 
+            </div>
+        </lightning-tab>
+
+
+        <lightning-tab label="Style Catalogue" icon-name="utility:palette">
+                <lightning-icon icon-name="utility:palette" alternative-text="Style Catalogue" title="Style Catalogue" size="small" ></lightning-icon>&nbsp; <b>Style Catalogue</b>
+                <div class="slds-card slds-m-top_medium slds-p-around_small">
+                        <p style="text-align:left; font-size:large; font-weight:bold;">
+                        Alert Style:
+                        </p>
+                        Alerts are only shown in bright, stand-out colours to grab the users attention. The icon associated with Alert Styles is a Flag, to indicate that this alert is something to listen to.
+                        <br/><br/>
+                        <div class="slds-align_absolute-center slds-var-m-bottom_xx-small">
+                            <div class="HardAlert" style="width: 70%;">
+                                <!-- Validation Icon -->
+                                <div class="slds-float_left slds-var-m-around_small">
+                                    <lightning-icon icon-name="utility:priority" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                                </div>
+            
+                                <!-- Validation Title -->
+                                <div class="slds-float_left slds-var-m-top_small">
+                                    <h2 class="slds-text-heading_medium ">Hard Alert - Example Title</h2>
+                                </div>
+                                <div style="clear:both;"></div>
+            
+                                <!-- Validation Message Output -->
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">This contact has no Phone. Please enter a phone number!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-align_absolute-center">                            
+                            <div class="SoftAlert" style="width: 70%;">
+                                <!-- Validation Icon -->
+                                <div class="slds-float_left slds-var-m-around_small">
+                                    <lightning-icon icon-name="utility:priority" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                                </div>
+            
+                                <!-- Validation Title -->
+                                <div class="slds-float_left slds-var-m-top_small">
+                                    <h2 class="slds-text-heading_medium ">Soft Alert - Example Title</h2>
+                                </div>
+                                <div style="clear:both;"></div>
+            
+                                <!-- Validation Message Output -->
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">This contact has no Phone. Please enter a phone number!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <p style="text-align:left; font-size:large; font-weight:bold;">
+                            Prompt Style:
+                        </p>
+                        Prompts are shown in 3 different colours, depending on the style selected (Hard Prompt, Soft Prompt, Subtle Prompt). 
+                        Ranging from stand-out colours to grab the users attention, down to a more subtle light yellow for those less urgent prompts. 
+                        The icon associated with Prompt Styles is a Message / Chat Bubble, to indicate that this prompt is something to bear in mind.
+                        <br/><br/>
+                        <div class="slds-align_absolute-center slds-var-m-bottom_xx-small">
+                            <div class="HardPrompt" style="width: 70%;">
+                                <!-- Validation Icon -->
+                                <div class="slds-float_left slds-var-m-around_small">
+                                    <lightning-icon icon-name="utility:prompt" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                                </div>
+            
+                                <!-- Validation Title -->
+                                <div class="slds-float_left slds-var-m-top_small">
+                                    <h2 class="slds-text-heading_medium ">Hard Prompt - Example Title</h2>
+                                </div>
+                                <div style="clear:both;"></div>
+            
+                                <!-- Validation Message Output -->
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">This contact has no Phone. Please enter a phone number!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-align_absolute-center slds-var-m-bottom_xx-small">
+                            <div class="SoftPrompt" style="width: 70%;">
+                                <!-- Validation Icon -->
+                                <div class="slds-float_left slds-var-m-around_small">
+                                    <lightning-icon icon-name="utility:prompt" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                                </div>
+            
+                                <!-- Validation Title -->
+                                <div class="slds-float_left slds-var-m-top_small">
+                                    <h2 class="slds-text-heading_medium ">Soft Promt - Example Title</h2>
+                                </div>
+                                <div style="clear:both;"></div>
+            
+                                <!-- Validation Message Output -->
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">This contact has no Phone. It's recommended to add one</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-align_absolute-center slds-var-m-bottom_xx-small">
+                            <div class="SubtlePrompt" style="width: 70%;">
+                                <!-- Validation Icon -->
+                                <div class="slds-float_left slds-var-m-around_small">
+                                    <lightning-icon icon-name="utility:prompt" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                                </div>
+            
+                                <!-- Validation Title -->
+                                <div class="slds-float_left slds-var-m-top_small">
+                                    <h2 class="slds-text-heading_medium ">Subtle Promt - Example Title</h2>
+                                </div>
+                                <div style="clear:both;"></div>
+            
+                                <!-- Validation Message Output -->
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">This contact has no Phone. It's recommended to add one</div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <p style="text-align:left; font-size:large; font-weight:bold;">
+                            Info Style:
+                        </p>
+                        Info is shown only in grey for those informational messages. 
+                        The icon associated with the Info Style is a info (i), to indicate that this message is providing information.
+                        <br/><br/>
+                        <div class="slds-align_absolute-center">
+                            <div class="Info" style="width: 70%;">
+                                <!-- Validation Icon -->
+                                <div class="slds-float_left slds-var-m-around_small">
+                                    <lightning-icon icon-name="utility:info" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                                </div>
+            
+                                <!-- Validation Title -->
+                                <div class="slds-float_left slds-var-m-top_small">
+                                    <h2 class="slds-text-heading_medium ">Info - Example Title</h2>
+                                </div>
+                                <div style="clear:both;"></div>
+            
+                                <!-- Validation Message Output -->
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">This contact has no Phone. It's recommended to add one</div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </lightning-tab>
+
+
+        <lightning-tab label="Help & Information" icon-name="utility:info_alt">
+            <lightning-icon icon-name="utility:info_alt" alternative-text="Help & Information" title="Help & Information" size="small" ></lightning-icon>&nbsp; <b>Help & Information</b>
+            <div class="slds-card slds-m-top_medium slds-p-around_small">
+                <lightning-accordion allow-multiple-sections-open
+                        active-section-name="BasicInstructions">
+                    <lightning-accordion-section name="BasicInstructions" label="Basic Instructions">
+                        <p style ="font-size:medium; font-weight:bold;">Add a Soft Validation</p>
+                        <p>Use the '+ Add a New Validation' button on the Manage Validation tab to create new softValidation records.
+                            <br/>Each softValidation requires various bits of information: Object, Style, Title, Message, Where Clause and Position. 
+                        </p>
+                        <br/>
+                        <p style ="font-size:medium; font-weight:bold;">Choose a Style</p>
+                        <p>The Style Catalogue provides you with examples of what each style provides. Different Styles provided different icons, and colours. Hopefully, there is enough style options available to cover your requirements.</p>
+                        <br/>
+                        <p style ="font-size:medium; font-weight:bold;">Tile & Message</p>
+                        <p>Provide a meaningful Title and Message text. These are what will advise and guide the user when your softValidation Where Clause has been triggered.</p>
+                        <br/>
+                        <p style ="font-size:medium; font-weight:bold;">Position</p>
+                        <p>If you have multiple softValidations defined for a single object, then the position is what defines which order the softValidations are shown on screen to the user.</p>
+                    
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="B" label="Criteria Help (SOQL Examples)">
+                        <p>Below, you can see some example SOQL Where Clauses. All example are using Contact as the example object.</p>
+                        <p><b>Note!</b> Do not write 'WHERE'. Your input Where Clause if for <u>after</u> the Where Clause. In the examples below, on the sections in single quotes (') should be input into the softValidations Where Clause input field.</p>
+                        <br/>
+                        <p style ="font-size:medium; font-weight:bold;">The Contact record does not have a Phone provided</p>
+                        <p>where 'Phone = null'</p>
+                        <br/>
+                        <p style ="font-size:medium; font-weight:bold;">The Contact record does not have a Phone or an Email provided</p>
+                        <p>where 'Phone = null AND email = null'</p>
+                        <br/>
+                        <p style ="font-size:medium; font-weight:bold;">The Contact record does not have a Phone or an Email provided and the related Account's Website is blank </p>
+                        <p>where 'Phone = null AND email = null AND account.website = null'</p>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

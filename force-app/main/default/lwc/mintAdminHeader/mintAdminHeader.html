@@ -1,0 +1,73 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-account" title="account">
+                        <img src={MintAdminHeaderLogo}>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span style="font-size: xx-large; color: #003867;">Admin Centre</span>
+                    </h2>
+                </div>
+                <div class="slds-no-flex">
+                    <lightning-button-icon 
+                        icon-name="utility:apex_alt" 
+                        variant="border-filled"  
+                        alternative-text="View Triggers" 
+                        title="View Triggers"
+                        onclick={goToLocation}
+                        data-location="triggers"
+                        class="slds-var-m-right_xx-small">
+                    </lightning-button-icon>
+                    <lightning-button-icon 
+                        icon-name="utility:apex" 
+                        variant="border-filled"  
+                        alternative-text="View Apex" 
+                        title="View Apex"
+                        onclick={goToLocation}
+                        data-location="apex"
+                        class="slds-var-m-right_xx-small">
+                    </lightning-button-icon>
+                    <lightning-button-icon 
+                        icon-name="utility:flow_alt" 
+                        variant="border-filled"  
+                        alternative-text="Manage Flows" 
+                        title="Manage Flows"
+                        onclick={goToLocation}
+                        data-location="flows"
+                        class="slds-var-m-right_xx-small">
+                    </lightning-button-icon>
+                    <lightning-button-icon 
+                        icon-name="utility:people" 
+                        variant="border-filled"  
+                        alternative-text="Manage Users" 
+                        title="Manage Users"
+                        onclick={goToLocation}
+                        data-location="users"
+                        class="slds-var-m-right_xx-small">
+                    </lightning-button-icon>
+                    <lightning-button-icon 
+                        icon-name="utility:bundle_config" 
+                        variant="border-filled"  
+                        alternative-text="Manage Permission Sets" 
+                        title="Manage Permission Sets"
+                        onclick={goToLocation}
+                        data-location="permsets"
+                        class="slds-var-m-right_xx-small">
+                    </lightning-button-icon>
+                    <lightning-button-icon 
+                        icon-name="utility:component_customization" 
+                        variant="border-filled"  
+                        alternative-text="Manage Profiles" 
+                        title="Manage Profiles"
+                        onclick={goToLocation}
+                        data-location="profiles">
+                    </lightning-button-icon>
+                </div>
+            </header>
+        </div>
+    </article>
+</template>

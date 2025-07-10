@@ -1,0 +1,105 @@
+<!--
+    @description       : Reusable SoftValidations component to display advisory field conditions
+    @author            : David Bradburn
+
+    Modifications Log 
+    Ver   Date         Author                         Modification
+    1.0   20-02-2022   David Bradburn                 Initial Version
+    2.0   12-08-2024   David Bradburn                 Updated to allow for collating validations with notification count
+-->
+
+<template>
+    <template if:true={foundValidationsMessages}>
+        <template if:false={collateRecords}>
+            <template for:each={objectValidations} for:item="validation">
+                <div key={validation.Id} class="slds-is-relative slds-var-m-bottom_xx-small slds-var-p-around_xx-small">
+                    <div class={validation.Validation_Style__c} role="alert">
+                        <!-- Validation Icon -->
+                        <div class="slds-float_left slds-var-m-around_small">
+                            <lightning-icon icon-name={validation.Validation_Icon__c} alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                        </div>
+
+                        <!-- Validation Title -->
+                        <div class="slds-float_left slds-var-m-around_x-small">
+                            <h2 class="slds-text-heading_medium ">{validation.Title__c}</h2>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                        <template if:true={validation.showMessage}>
+                            <!-- Validation Message Output -->
+                            <div class="slds-align_absolute-center">
+                                <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">{validation.Message__c}</div>
+                            </div>
+                        </template>
+                        
+                    </div>
+                </div>
+            </template>
+        </template>
+        <template if:true={collateRecords}>
+            <div class="HardAlert slds-var-m-bottom_xx-small slds-var-p-around_xx-small">
+
+                <div class="slds-float_left slds-var-m-around_small">
+                    <lightning-icon icon-name="utility:notification" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                </div>
+
+                <div class="slds-float_left slds-var-m-around_x-small">
+                    <h2 class="slds-text-heading_medium"> {numberOfValidations} Validations</h2>
+                </div>
+
+                <template if:false={expanded}>
+                    <div class="slds-float_right slds-var-m-around_x-small">
+                        <lightning-button label="Show" icon-name="utility:chevrondown" alternative-text="Expand soft Validations" variant="destructive" onclick={toggleExpand}></lightning-button>
+                    </div>
+                </template>
+                <template if:true={expanded}>
+                    <div class="slds-float_right slds-var-m-around_x-small">
+                        <lightning-button label="Hide" icon-name="utility:chevronup" alternative-text="Collapse soft Validations" variant="destructive" onclick={toggleExpand}></lightning-button>
+                    </div>
+                </template>
+
+                <div style="clear:both;"></div>
+            </div>
+            <template if:true={expanded}>
+                <template for:each={objectValidations} for:item="validation">
+                    <div key={validation.Id} class="slds-is-relative slds-var-m-bottom_xx-small slds-var-p-around_xx-small">
+                        <div class={validation.Validation_Style__c} role="alert">
+                            <!-- Validation Icon -->
+                            <div class="slds-float_left slds-var-m-around_small">
+                                <lightning-icon icon-name={validation.Validation_Icon__c} alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+                            </div>
+    
+                            <!-- Validation Title -->
+                            <div class="slds-float_left slds-var-m-around_x-small">
+                                <h2 class="slds-text-heading_medium ">{validation.Title__c}</h2>
+                            </div>
+                            <div style="clear:both;"></div>
+    
+                            <template if:true={validation.showMessage}>
+                                <!-- Validation Message Output -->
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-text-heading_small slds-text-body_regular slds-var-m-bottom_small slds-var-m-top_x-small">{validation.Message__c}</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </template>
+    </template>
+
+    <template if:false={foundValidationsMessages}>
+        <div class="noAlerts slds-var-m-bottom_xx-small slds-var-p-around_xx-small">
+
+            <div class="slds-float_left slds-var-m-around_small">
+                <lightning-icon icon-name="utility:success" alternative-text="Soft Validation" size="small" title="Soft Validation" class="darkIcon"></lightning-icon> 
+            </div>
+
+            <div class="slds-float_left slds-var-m-around_x-small">
+                <h2 class="slds-text-heading_medium "> 0 Validations</h2>
+            </div>
+
+            <div style="clear:both;"></div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>APIVersions</label>
+    <protected>true</protected>
+    <values>
+        <field>Formatted_Name__c</field>
+        <value xsi:type="xsd:string">API Versions</value>
+    </values>
+    <values>
+        <field>Recommendation_Text__c</field>
+        <value xsi:type="xsd:string">Ask your Salesforce developer to update these elements with the current API version. Give your developer the following resources for best practices on updating code.</value>
+    </values>
+    <values>
+        <field>Result_Text__c</field>
+        <value xsi:type="xsd:string">You have {X} code elements that use out-of-date API versions. API versions that are more than nine releases—or three years—old can hinder your code’s performance.</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,88 @@
+.darkbackground {
+    background-color: rgb(250, 250, 250);
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 4px;
+    border: solid 2px rgb(214, 213, 213);
+}
+
+.lightbackground {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 4px;
+    border: solid 2px rgb(214, 213, 213);
+}
+
+.validationTableHeader {
+    /* background-color: rgb(214, 213, 213); */
+    background-color: #06496C;
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 0px;
+    border: solid 2px #06496C;
+    color: white;
+    font-weight: bold;
+}
+
+/* Catalogue Styling Classes - START */
+.HardAlert, .SoftAlert, .HardPrompt, .SoftPrompt, .SubtlePrompt, .Info {
+    border-radius: 4px;
+    border: #C9C9C9 1px solid !important;
+}
+
+.HardAlert {
+    background-color: rgb(211, 89, 89);
+}
+
+.SoftAlert {
+    background-color: rgb(233, 170, 76);
+
+}
+
+.HardPrompt {
+    background-color: rgb(211, 89, 89);
+}
+
+.SoftPrompt {
+    background-color: rgb(233, 170, 76);
+}
+
+.SubtlePrompt {
+    background-color: rgb(236, 213, 162);
+}
+
+.Info {
+    background-color: rgb(211, 211, 211);
+}
+
+.darkIcon {
+    --lwc-colorTextIconDefault: rgb(73, 73, 73);
+}
+/* Catalogue Styling Classes - END */
+
+:host {
+    /* --sds-c-checkbox-toggle-switch-color-background: orange; */
+    --sds-c-checkbox-toggle-color-background-checked: #26DAC9;
+}
+
+/* POWERED BY MINTCRM */
+.poweredBy {
+    color: #2edbcb;
+    font-size: 0.9em;
+    margin-left: var(--lwc-varSpacingHorizontalSmall, 0.75rem);
+    margin-right: var(--lwc-varSpacingHorizontalSmall, 0.75rem);
+    margin-top: var(--lwc-varSpacingVerticalXSmall, 0.5rem);
+    padding-right: var(--lwc-varSpacingHorizontalXxSmall);
+    padding-top: var(--lwc-varSpacingVerticalXSmall, 0.5rem);
+    text-align: right;
+}
+.logo-svg {
+    margin-right: 5px;
+}
+svg.logo-svg:hover > .sh-ten {
+    transform: translate3d(10px, 0, 0);
+}
+svg.logo-svg:hover > .sh-twenty {
+    transform: translate3d(20px, 0, 0);
+}

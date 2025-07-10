@@ -1,0 +1,56 @@
+.keyAccountCollab{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.keyManualCollab{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    background-color: #dbdbdb;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.keyExcludedCollab{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    background-color: #c78585;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+/* .collabLimitedReached{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    background-color: #c78585;
+    padding: 4px 8px 4px 8px;
+    width: 100%;
+} */
+
+.promptBox{
+    background-color: #EBFFFC; 
+    border: 2px #05C9DB dashed; 
+    border-radius: 6px; 
+    padding: 30px; 
+    margin: 15px; 
+    text-align:center;
+}
+
+.promptBoxCloseToLimit{
+    background-color: #EBFFFC; 
+    border: 2px #05C9DB dashed; 
+    border-radius: 6px; 
+    padding: 15px; 
+    margin-bottom: 20px; 
+    text-align:center;
+}
+
+.slds-pill__label{
+    color: #0C064D;
+}
+
+.slds-pill__label:hover{
+    color: #05C9DB;
+}

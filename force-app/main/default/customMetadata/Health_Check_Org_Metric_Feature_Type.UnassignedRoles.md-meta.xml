@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>UnassignedRoles</label>
+    <protected>true</protected>
+    <values>
+        <field>Formatted_Name__c</field>
+        <value xsi:type="xsd:string">Unassigned Roles</value>
+    </values>
+    <values>
+        <field>Recommendation_Text__c</field>
+        <value xsi:type="xsd:string">Delete roles that don’t have active users assigned to them, and use your sandbox to test changes before you deploy them to your users.</value>
+    </values>
+    <values>
+        <field>Result_Text__c</field>
+        <value xsi:type="xsd:string">You have {X} unassigned roles. Unassigned roles make your implementation difficult to maintain.</value>
+    </values>
+</CustomMetadata>

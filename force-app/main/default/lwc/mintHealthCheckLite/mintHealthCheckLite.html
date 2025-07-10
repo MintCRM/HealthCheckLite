@@ -1,0 +1,26 @@
+<template>
+    <template if:true={jsPdfInitialized}>
+        <div class="slds-size_1-of-1 slds-grid slds-grid_align-center">
+            <div class="slds-size_1-of-4">
+                <lightning-card title="Org Metrics PDF Export">
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                    </template>
+                    <div class="slds-align_absolute-center slds-p-top_medium">
+                        <lightning-input
+                            type="text"
+                            class="slds-size_1-of-2"
+                            label="Company Name (For PDF Cover)"
+                            value={companyName}
+                            onchange={handleCompanyNameChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-align_absolute-center slds-p-vertical_medium">
+                        <lightning-button label="Generate PDF" onclick={handleGeneratePdf}></lightning-button>
+                    </div>
+                    <img src={mintLogo} alt="Mint Logo" class="slds-size_1-of-6" style="float: right; margin-right: 1em; margin-top: -13.8em;"/>
+                </lightning-card>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>InactiveChatterUsers</label>
+    <protected>true</protected>
+    <values>
+        <field>Formatted_Name__c</field>
+        <value xsi:type="xsd:string">Inactive Chatter Users</value>
+    </values>
+    <values>
+        <field>Recommendation_Text__c</field>
+        <value xsi:type="xsd:string">Remind users who haven’t logged in to Chatter recently to check their accounts regularly. Monitor your org’s Chatter engagement with Chatter dashboards.</value>
+    </values>
+    <values>
+        <field>Result_Text__c</field>
+        <value xsi:type="xsd:string">You have users that haven&apos;t contributed to Chatter within the past 30 days. If users aren’t logging in and contributing regularly, your company might not be taking full advantage of Chatter’s benefits.</value>
+    </values>
+</CustomMetadata>

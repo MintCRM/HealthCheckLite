@@ -1,0 +1,513 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <!-- HEADER SECTION -->
+        <div class="slds-col slds-size_12-of-12 slds-var-m-bottom_medium">
+            <article class="slds-card">
+                <div class="slds-card__header slds-grid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure">
+                            <!-- MintCRM Logo -->
+                            <div style="width:115px; height:50px; text-align: center; margin-top:auto; margin-bottom:auto;">
+                                <a href="https://www.mintcrm.co.uk" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        width="115" 
+                                        height="50" 
+                                        viewBox="0 0 115 50">
+                                        <image xlink:href="data:image/png;base64,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" 
+                                            x="0" 
+                                            y="0" 
+                                            width="115" 
+                                            height="50"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="slds-media__body">
+                            <h2 class="slds-card__header-title">
+                                <span style="font-size: xx-large; color: #003867; padding-bottom: 2px;">
+                                    History Tracking
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="slds-no-flex">
+                            <template if:false={isLoading}>
+                                <div class="slds-grid">
+                                    <div class="slds-col" style="margin-top: 2px !important;">
+                                        <lightning-button-icon 
+                                            icon-name="utility:settings"  
+                                            variant="bare" 
+                                            alternative-text="All Settings" 
+                                            title="All Settings"
+                                            class="slds-var-m-right_small"
+                                            onclick={openSettingsModal}>
+                                        </lightning-button-icon>
+                                    </div>
+                                    <div class="slds-col" style="margin-top: 0px !important;">
+                                        <lightning-helptext 
+                                            content="If Active, History Tracking is Turned On for configured Objects. You may want to deactivate History Tracking when performing Mass Data Loads for example.">
+                                        </lightning-helptext>
+                                    </div>
+                                    <div class="slds-col slds-col slds-var-m-left_small">
+                                        <lightning-input 
+                                            type="toggle" 
+                                            name="isTracking"
+                                            checked={trackingActive}
+                                            onchange={saveTrackingActiveToggle}
+                                            label="Tracking Active"
+                                            variant="label-hidden"
+                                            message-toggle-inactive=""
+                                            message-toggle-active=""
+                                            title={trackingStatus}
+                                            class="slds-col slds-var-m-top_xxx-small">
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-var-m-left_small" 
+                                        style={trackingStatusStyle}
+                                        title={trackingStatus}>
+                                        {trackingStatus}
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </header>
+                </div>
+            </article>
+        </div>
+
+        <!-- FIELD SELECTION - LEFT PANEL -->
+        <div class="slds-col slds-size_8-of-12 slds-var-m-bottom_medium">
+            <div class="slds-card">
+                <div class="slds-page-header">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="standard:multi_select_checkbox"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate slds-var-m-top_xx-small" title="Mint Field Tracking">
+                                                Field Tracking
+                                            </span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="slds-page-header__col-actions">
+                            <div class="slds-page-header__controls">
+                                <div class="slds-page-header__control">
+                                    <template if:true={get_existingTrackedFieldsOnSelectedObject}>
+                                        <span class="statContainer">
+                                            {get_currentObjectExistingTrackedFields}
+                                        </span>
+                                    </template>
+                                    <template if:true={get_existingTrackedFieldsOnSelectedObject}>
+                                        <lightning-button  
+                                            variant="border-filled" 
+                                            alternative-text="Deselect All"  
+                                            title="Deselect All"
+                                            label="Deselect All"
+                                            onclick={handle_deselectAllFields}
+                                            class="slds-var-m-left_x-small">
+                                        </lightning-button>
+                                    </template>
+                                    <template if:true={get_showRemoveTrigger}>
+                                        <lightning-button  
+                                            variant="destructive-text"
+                                            alternative-text="Remove Trigger"  
+                                            title="Remove Trigger"
+                                            label="Remove Trigger"
+                                            onclick={removeTrigger}
+                                            class="slds-var-m-left_x-small"
+                                            style="color: red"
+                                            disabled={disableAdminFeatures}>
+                                        </lightning-button>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-meta slds-var-m-top_x-small">
+                            <lightning-input
+                                label="Search and Select Object to Track"
+                                onchange={search}
+                                onfocus={showPickListOptions}
+                                type="search"
+                                value={selectedSearchValue}
+                                variant="label-hidden"
+                                placeholder="Search & Select an Object to Track">
+                            </lightning-input>
+
+                            <div if:true={searchResults}
+                                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                style="position: relative"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchResults} for:item="searchResult">
+                                        <li 
+                                            key={searchResult.value} 
+                                            data-value={searchResult.value} 
+                                            role="presentation" 
+                                            onclick={selectSearchResult} 
+                                            class="slds-listbox__item"
+                                        >
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title={searchResult.label}>
+                                                        {searchResult.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div> 
+
+                            <template if:true={get_existingTrackedFieldsOver20}>
+                                <div class="infoBoxSearchBar">
+                                    Only track fields which require tracking. 
+                                    <br/>Tracking unnecessary fields can contribute to large amounts of fields to process and increase loading times.
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+        
+        
+                <div class="slds-var-p-horizontal_small slds-var-p-vertical_medium slds-scrollable_y"
+                style="max-height: 65vh;">
+
+                    <!-- Each Field Container -->
+                    <template lwc:if={currentSelectedObject}>
+                        
+                        <template if:true={get_currentObjectExistingUnavailableTrackedFields}>
+                            &MediumSpace;<b>Unavailable Fields</b> These fields no longer exists on this object. We recommend removing Tracking for these fields.
+                            <div class="slds-grid slds-wrap unavailableFieldsContainer">
+                                <!-- UNAVAILABLE TRACKED FIELDS -->
+                                <template for:each={currentObjectExistingUnavailableTrackedFields} for:item="field">
+                                    <div class="slds-col slds-size_3-of-12" key={field.value} style="padding: 3px;">
+                                        <div class="unavailableFieldContainer">
+                                            <div class="slds-grid" 
+                                                title="This field no longer exists on this object. Remove Field Tracking" >
+                                                <div class="slds-col_bump-right slds-truncate">
+                                                    <span class="slds-truncate">
+                                                        {field.Field_Name__c}
+                                                    </span>
+                                                    </br>
+                                                    <span class="slds-truncate" style="font-size:x-small;">
+                                                        {field.Field_API_Name__c}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <lightning-button-icon 
+                                                        icon-name="utility:delete"
+                                                        variant="border-filled" 
+                                                        alternative-text="This field no longer exists on this object. Remove Field Tracking" 
+                                                        class="slds-m-left_xx-small removeFieldButton" 
+                                                        title="This field no longer exists on this object. Remove Field Tracking"
+                                                        value={field.Field_API_Name__c}
+                                                        onclick={handleRemoveUnavailableField}>
+                                                    </lightning-button-icon>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+
+
+                        <div class="slds-grid slds-wrap">
+                            <!-- AVAILABE FIELDS -->
+                            <template for:each={objectFieldOptions} for:item="field">
+                                <div class="slds-col slds-size_3-of-12" key={field.value} style="padding: 3px;">
+                                    <div class="fieldContainer">
+                                        <div class="slds-grid">
+                                            <div class="slds-col_bump-right slds-truncate">
+                                                <span class="slds-truncate">
+                                                    {field.label}
+                                                </span>
+                                                </br>
+                                                <span class="slds-truncate" style="font-size:x-small;">
+                                                    {field.value}
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <template if:false={field.unavailable}>
+                                                    <lightning-input 
+                                                        type="checkbox-button" 
+                                                        label={field.label} 
+                                                        name="isTracking"
+                                                        value={field.value}
+                                                        checked={field.tracking}
+                                                        onchange={handleFieldTrackingToggle}>
+                                                    </lightning-input>
+                                                </template>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+        
+                    <template lwc:else>
+                        <div class="promptBox">
+                            <b>Search Objects</b> above to start tracking ↑
+                            <br/>or select a <b>Tracked Object</b> record → 
+                        </div>
+                    </template>
+
+                    <template if:false={isTriggerPresent}>
+                        <div class="infoBox">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_2-of-12">
+                                    <!-- SPACER -->
+                                </div>
+                                <div class="slds-col slds-size_1-of-12">
+                                    <lightning-icon 
+                                        icon-name="utility:setup_assistant_guide"
+                                        size="large">
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    To Track the Fields on this Object, <b>Deploy the Object Trigger!</b>
+                                    <br/>
+                                    <br/>
+                                    <lightning-button
+                                        label="Deploy Trigger"
+                                        onclick={createObjectTrigger}
+                                        variant="brand"
+                                        disabled={disableAdminFeatures}>
+                                    </lightning-button>
+                                    <template if:true={disableAdminFeatures}>
+                                        <br/>
+                                        <br/>
+                                        <span class="slds-text-color_error">
+                                            Only <b>System Administrators</b> can deploy & remove triggers.
+                                        </span>
+                                    </template>
+
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHEDULE SECTION - RIGHT PANEL -->
+        <div class="slds-col slds-var-m-left_medium">
+
+            <!-- EXISTING TRACKED OBJECTS -->
+            <div class="slds-card">
+                <div class="slds-page-header">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="standard:budget_period"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate slds-var-m-top_xx-small" title="Tracked Objects">
+                                                Tracked Objects
+                                            </span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="slds-page-header__col-actions">
+                            <div class="slds-page-header__controls">
+                                <div class="slds-page-header__control">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-var-m-right_small" style="margin-top: -4px;">
+                                            <lightning-helptext 
+                                                content="Objects with a Deployed Trigger and at least 1 Tracked Field are displayed in this list.">
+                                            </lightning-helptext>
+                                        </div>
+                                        <template if:true={found_existingTrackingObjects}>
+                                            <div class="slds-col" style="">
+                                                <span class="statContainer">
+                                                    {get_existingTrackingObjects}
+                                                </span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-meta slds-var-m-top_x-small">
+                            <span style="font-size:smaller">
+                                Select an existing Tracked Object to Update it's Field Tracking
+                            </span>
+                        </div>
+                    </div>
+                </div>
+        
+        
+                <div class="slds-var-p-horizontal_small slds-var-p-vertical_medium slds-scrollable_y"
+                style="max-height: 450px;">
+        
+                    <template if:true={found_existingTrackingObjects}>
+                        <template for:each={existingTrackingObjects} for:item="object">
+                            <div 
+                                key={object.objectName} 
+                                class="objectContainer"
+                                data-value={object.objectName}
+                                data-label={object.objectLabel}
+                                onclick={handleSelectExistingObject}>
+                                <div class="slds-grid">
+                                    <div class="slds-col_bump-right slds-truncate">
+                                        <span class="slds-truncate">
+                                            {object.objectLabel}
+                                        </span>
+                                        </br>
+                                        <span class="slds-truncate" style="font-size:x-small;">
+                                            {object.objectName}
+                                        </span>
+                                    </div>
+                                    <div class="statContainer">
+                                        {object.count}
+                                    </div>
+                                </div> 
+                            </div>
+                        </template>
+                    </template>
+        
+                    <template if:false={found_existingTrackingObjects}>
+                        <div class="promptBox">
+                            No Tracked Object Records Found
+                        </div>
+                    </template>
+
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </template>
+                </div>
+            </div>
+
+
+
+            <div class="slds-card">
+                <div class="slds-page-header">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="standard:recycle_bin"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate slds-var-m-top_xx-small" title="Automatic Archiving">Automatic Archiving</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="slds-page-header__col-actions">
+                            <div class="slds-page-header__controls">
+                                <div class="slds-page-header__control">
+                                    <template if:true={archiveScheduleChanged}>
+                                        <lightning-button
+                                            label="Save Schedule"
+                                            onclick={saveArchiveSchedule}
+                                            variant="brand">
+                                        </lightning-button>
+                                    </template>
+                                    <template if:false={archiveScheduleChanged}>
+                                        <div style={autoArchiveDefaultRecord.style}
+                                            title={getAutoArchiveStatus}>
+                                            {getAutoArchiveStatus}
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+                <div class="slds-var-p-horizontal_small slds-var-p-vertical_medium slds-scrollable_y">
+                    <div class="slds-grid slds-var-p-bottom_small">
+                        <div class="slds-col slds-size_2-of-12">
+                            <div class="slds-align_absolute-center slds-var-p-top_medium">
+                                <lightning-icon 
+                                    icon-name="utility:expired"
+                                    size="large">
+                                </lightning-icon>
+                            </div>
+                        </div> 
+                        <div class="slds-col slds-size_9-of-12 objectContainer">
+                            <div class="slds-grid slds-var-p-bottom_small">
+                                <div class="slds-col slds-size_1-of-12">
+                                    <!-- Spacer -->
+                                </div>
+                                <div class="slds-col slds-size_8-of-12 slds-col_bump-right">
+                                    <lightning-combobox
+                                        name="ArchivePeriod"
+                                        label="Archive Period"
+                                        value={autoArchiveDefaultRecord.Archive_Period_Years__c}
+                                        title={autoArchiveDefaultRecord.Archive_Period_Years__c}
+                                        placeholder="Select Archive Period"
+                                        options={archivePeriodOptions}
+                                        onchange={archivePeriodOptions_handleChange}
+                                        required
+                                        dropdown-alignment="auto"
+                                        style="position: absolute"
+                                    ></lightning-combobox>
+                                </div>
+                                <div class="slds-col slds-size_3-of-12">
+                                    <div class="slds-var-p-top_medium">
+                                        <!-- <center> -->
+                                            <lightning-input 
+                                                type="toggle" 
+                                                label="Active" 
+                                                name="ArchiveActiveToggle"
+                                                variant="label-hidden"
+                                                checked={autoArchiveDefaultRecord.Archive_Schedule_Active__c}
+                                                onchange={archivePeriodActive_handleChange}
+                                                title={getAutoArchiveStatus}>
+                                            </lightning-input>
+                                        <!-- </center> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template if:true={archiveScheduleChanged}>
+                        <div class="promptBox">
+                            Remember to <b>Save</b> your changes!
+                        </div>
+                    </template>
+
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
