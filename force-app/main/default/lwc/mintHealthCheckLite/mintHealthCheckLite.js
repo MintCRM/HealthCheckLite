@@ -175,26 +175,26 @@ export default class MintHealthCheckLite extends LightningElement {
         doc.addImage(mintHealthCheckFooter, 'PNG', 0, 265, doc.internal.pageSize.getWidth(), 32);
         doc.setFontSize(18);
         doc.setFont('calibri', 'bold');
-        doc.setTextColor(4, 240, 205);
+        doc.setTextColor(0, 63, 121);
         doc.text('Overview', 30, 40, { align: 'center' });
         doc.setFontSize(10);
         doc.setFont('calibri', 'normal');
         doc.setTextColor(87, 87, 87);
         doc.text(overviewIntroLine, 20, 60);
-        doc.text(overviewRAGLine, 20, 80);
+        doc.text(overviewRAGLine, 20, 70);
         doc.setTextColor(255, 0, 0);
-        doc.text('Red', 40, 100, { align: 'center' });
+        doc.text('Red', 23, 80, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = Recommended', 55, 100, { align: 'center' });
+        doc.text(' = Recommended', 38, 80, { align: 'center' });
         doc.setTextColor(232, 151, 12);
-        doc.text('Amber', 42, 105, { align: 'center' });
+        doc.text('Amber', 25, 85, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = Advisory', 55, 105, { align: 'center' });
+        doc.text(' = Advisory', 38, 85, { align: 'center' });
         doc.setTextColor(63, 217, 28);
-        doc.text('Green', 41, 110, { align: 'center' });
+        doc.text('Green', 24, 90, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = No Action Required', 61, 110, { align: 'center' });
-        doc.text(overviewEndLine, 20, 140);
+        doc.text(' = No Action Required', 44, 90, { align: 'center' });
+        doc.text(overviewEndLine, 20, 100);
         tocEntries.push({ title: 'Overview', page: doc.getCurrentPageInfo().pageNumber });
         doc.addPage();
         //Estimated Effort Overview Page
@@ -203,7 +203,7 @@ export default class MintHealthCheckLite extends LightningElement {
         doc.addImage(mintHealthCheckFooter, 'PNG', 0, 265, doc.internal.pageSize.getWidth(), 32);
         doc.setFontSize(18);
         doc.setFont('calibri', 'bold');
-        doc.setTextColor(4, 240, 205);
+        doc.setTextColor(0, 63, 121);
         doc.text('Estimated Effort Overview', 50, 40, { align: 'center' });
         tocEntries.push({ title: 'Estimated Effort Overview', page: doc.getCurrentPageInfo().pageNumber });
         doc.addPage();
@@ -278,7 +278,7 @@ export default class MintHealthCheckLite extends LightningElement {
                 const firstChild = metric.OrgMetric[0];
                 // Map result label
                 let resultLabel = this.featureTypeMap[metric.FeatureType]?.mint__Result_Text__c;
-                if (resultLabel != undefined && resultLabel.includes('{X}') && firstChild.Status !== 'NoActionRequired' && firstChild.Status !== 'NotCurrentlyEnabled') {
+                if (resultLabel != undefined && firstChild.Status !== 'NoActionRequired' && firstChild.Status !== 'NotCurrentlyEnabled') {
                     resultLabel = resultLabel.replace('{X}', firstChild.ItemCount);
                 } else {
                     resultLabel = 'Great job! No action required.';
@@ -456,12 +456,14 @@ export default class MintHealthCheckLite extends LightningElement {
                             valign: 'middle'
                         },
                         headStyles: {
+                            font: 'calibri',
                             fillColor: [0, 63, 121],
                             textColor: [255, 255, 255],
                             fontStyle: 'bold',
                             fontSize: 10
                         },
                         bodyStyles: {
+                            font: 'calibri',
                             fillColor: [245, 245, 245],
                             textColor: [0, 0, 0]
                         },
@@ -491,12 +493,14 @@ export default class MintHealthCheckLite extends LightningElement {
                 valign: 'middle'
             },
             headStyles: {
+                font: 'calibri',
                 fillColor: [4, 240, 205],
                 textColor: [0, 63, 121],
                 fontStyle: 'bold',
                 fontSize: 10
             },
             bodyStyles: {
+                font: 'calibri',
                 fillColor: [245, 245, 245],
                 textColor: [0, 0, 0]
             },
@@ -528,12 +532,12 @@ export default class MintHealthCheckLite extends LightningElement {
         const pageCount = doc.getNumberOfPages();
 
         for (let i = 1; i < pageCount; i++) {
-            doc.setPage(i+1);
+            doc.setPage(i+2); // Skip cover and TOC pages
 
             doc.setFontSize(10);
             doc.setTextColor(100);
             doc.setFont('calibri', 'normal');
-            doc.text(`Page ${i+1} of ${pageCount} | V.1 | Confidential`, 35, pageHeight - 16, { align: 'center' });
+            doc.text(`Page ${i+2} of ${pageCount} | V.1 | Confidential`, 35, pageHeight - 16, { align: 'center' });
             //doc.text(` ${i+1} / ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
         }
 
