@@ -20,7 +20,7 @@ public with sharing class mintHealthCheckLite {
         Map<String, sObject> featureTypeMap = new Map<String, sObject>();
 
         List<Health_Check_Org_Metric_Feature_Type__mdt> featureTypes = [
-            SELECT Label, mint__Formatted_Name__c, mint__Recommendation_Text__c, mint__Result_Text__c
+            SELECT Label, Formatted_Name__c, Recommendation_Text__c, Result_Text__c
             FROM Health_Check_Org_Metric_Feature_Type__mdt
         ];
 
