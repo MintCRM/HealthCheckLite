@@ -165,37 +165,74 @@ export default class MintHealthCheckLite extends LightningElement {
         const tocPageNumber = doc.getCurrentPageInfo().pageNumber;
         doc.addPage(); // Add actual contents page
         // Health check doc overview page
-        const introText = 'This health check lite review was conducted by Mint® and outlines the findings following the review. It includes both recommendations and Salesforce best practice guidance.';
-        const RAGText = 'A RAG approach has been used to help highlight prioritisation of the areas where action is advisable.';
-        const endText = 'Where there are actions recommended, an estimated number of hours has been added to show potential time impact to resolve/implement. This is based on a user having strong System Administration skills and knowledge of the client\'s Salesforce platform.';
+        const introText = 'This Mint® Health Check Lite has been created to provide you with a transparent and insightful assessment of your Salesforce® setup giving you a clear picture of how it performs against what really matters.';
+        const overviewText = 'We’ve outlined key findings across three critical areas: what\'s currently missing, what may be at risk, and where there\’s untapped potential for greater efficiency and value. This report is designed as a practical, actionable starting point to help you get more out of your Salesforce® investment.';
+        const RAGText = 'A RAG approach has been used to help highlight priority areas where action is advisable:';
+        const noteText = 'Note: Estimates included are based on users /system administrator having a high level of experience configuring the Salesforce® platform.';
+        const conclusionText = 'If you’re ready to explore these insights further, we’re here to help. We’ll guide you through the results, answer any questions, and work with you to define a clear path forward tailored to your goals and priorities.';
+        const endText = 'Let’s take the next step together.';
+        const contactInfoTextA = 'Contact our ';
+        const contactInfoTextB = ' Business Development Manager ';
+        const contactInfoTextC = ' to discuss your report further.';
+        const businessManagerNameText = 'Tom Metalle';
+        const businessManagerEmailText = 'tom.metalle@mintcrm.co.uk';
         const overviewIntroLine = doc.splitTextToSize(introText, maxOverviewTextWidth);
+        const overviewTextLine = doc.splitTextToSize(overviewText, maxOverviewTextWidth);
         const overviewRAGLine = doc.splitTextToSize(RAGText, maxOverviewTextWidth);
+        const overviewNoteLine = doc.splitTextToSize(noteText, maxOverviewTextWidth);
+        const overviewConclusionTextLine = doc.splitTextToSize(conclusionText, maxOverviewTextWidth);
         const overviewEndLine = doc.splitTextToSize(endText, maxOverviewTextWidth);
+        const overviewContactTextLineA = doc.splitTextToSize(contactInfoTextA, maxOverviewTextWidth);
+        const overviewContactTextLineB = doc.splitTextToSize(contactInfoTextB, maxOverviewTextWidth);
+        const overviewContactTextLineC = doc.splitTextToSize(contactInfoTextC, maxOverviewTextWidth);
+        const overviewBusinessManagerLine = doc.splitTextToSize(businessManagerNameText, maxOverviewTextWidth);
+        const overviewBusinessManagerEmailLine = doc.splitTextToSize(businessManagerEmailText, maxOverviewTextWidth);
+        // Overview/Know Where You Stand with Salesforce® Page
         doc.addImage(mintHealthCheckHeader, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), 32);
         doc.addImage(mintHealthCheckFooter, 'PNG', 0, 265, doc.internal.pageSize.getWidth(), 32);
         doc.setFontSize(18);
         doc.setFont('calibri', 'bold');
         doc.setTextColor(0, 63, 121);
-        doc.text('Overview', 30, 40, { align: 'center' });
-        doc.setFontSize(10);
+        doc.text('Know Where You Stand with Salesforce®', 70, 40, { align: 'center' });
+        doc.setFontSize(11);
         doc.setFont('calibri', 'normal');
         doc.setTextColor(87, 87, 87);
         doc.text(overviewIntroLine, 20, 60);
-        doc.text(overviewRAGLine, 20, 70);
+        doc.text(overviewTextLine, 20, 75);
+        doc.text(overviewRAGLine, 20, 95);
+        doc.text('•', 28, 105, { align: 'center' });
         doc.setTextColor(255, 0, 0);
-        doc.text('Red', 23, 80, { align: 'center' });
+        doc.text('Red', 33, 105, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = Recommended', 38, 80, { align: 'center' });
+        doc.text(' = Recommended', 50, 105, { align: 'center' });
+        doc.text('•', 28, 110, { align: 'center' });
         doc.setTextColor(232, 151, 12);
-        doc.text('Amber', 25, 85, { align: 'center' });
+        doc.text('Amber', 35, 110, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = Advisory', 38, 85, { align: 'center' });
-        doc.setTextColor(63, 217, 28);
-        doc.text('Green', 24.5, 90, { align: 'center' });
+        doc.text(' = Advisory', 49, 110, { align: 'center' });
+        doc.text('•', 28, 115, { align: 'center' });
+        doc.setTextColor(0, 176, 80);
+        doc.text('Green', 34.5, 115, { align: 'center' });
         doc.setTextColor(87, 87, 87);
-        doc.text(' = No Action Required', 44.5, 90, { align: 'center' });
-        doc.text(overviewEndLine, 20, 100);
-        tocEntries.push({ title: 'Overview', page: doc.getCurrentPageInfo().pageNumber });
+        doc.text(' = No Action Required', 56.5, 115, { align: 'center' });
+        doc.text(overviewNoteLine, 20, 125);
+        doc.text(overviewConclusionTextLine, 20, 140);
+        doc.text(overviewEndLine, 20, 150);
+        doc.text(overviewContactTextLineA, 20, 160);
+        doc.setTextColor(0, 63, 121);
+        doc.setFont('calibri', 'bold');
+        doc.text(overviewContactTextLineB, 38.8, 160);
+        doc.setTextColor(87, 87, 87);
+        doc.setFont('calibri', 'normal');
+        doc.text(overviewContactTextLineC, 92, 160);
+        doc.setFont('calibri', 'bold');
+        doc.text(overviewBusinessManagerLine, 20, 170);
+        doc.setFont('calibri', 'normal');
+        // doc.text(overviewBusinessManagerEmailLine, 20, 170);
+        doc.setTextColor(0, 0, 255);
+        doc.textWithLink(overviewBusinessManagerEmailLine, 20, 175, { url: 'mailto:' + businessManagerEmailText });
+        doc.setTextColor(87, 87, 87);
+        tocEntries.push({ title: 'Know Where You Stand with Salesforce®', page: doc.getCurrentPageInfo().pageNumber });
         doc.addPage();
         //Estimated Effort Overview Page
         const estimateOverviewPage = doc.getCurrentPageInfo().pageNumber;
@@ -266,7 +303,9 @@ export default class MintHealthCheckLite extends LightningElement {
                 }
             }
             category = category.replace(/(?!^)([A-Z])/g, ' $1');
-            doc.text(`${category} - ${formattedName}`, 10, y);
+            const orgMetricHeaderText = `${category} - ${formattedName}`;
+            const orgMetricPageHeader = doc.splitTextToSize(orgMetricHeaderText, maxTextWidth);
+            doc.text(orgMetricPageHeader, 10, y);
             doc.setTextColor(0, 63, 121);
             //Contents page row title
             const sectionTitle = `${category} - ${formattedName}`;
@@ -393,7 +432,7 @@ export default class MintHealthCheckLite extends LightningElement {
                     },
                     theme: 'grid',
                     columnStyles: {
-                        0: { cellWidth: 150 }
+                        0: { cellWidth: 145.5 }
                     },
                     didParseCell: function (data) {
                         const { row, cell } = data;
@@ -403,8 +442,53 @@ export default class MintHealthCheckLite extends LightningElement {
                             cell.styles.fillColor = [4, 240, 205]; // Mint Green
                             cell.styles.textColor = [0, 63, 121];  // Mint Dark Blue
                             cell.styles.fontStyle = 'bold';
+                        } else {
+                            cell.styles.textColor = [87, 87, 87]; // Grey
                         }
                     }
+                });
+                // 3. ESTIMATED EFFORT TABLE (Single-column)
+                autoTable(doc, {
+                    startY: y+79,
+                    body: [
+                        [{ content: 'Estimated Effort:', styles: { fontStyle: 'bold' } }],
+                        [{
+                            content: effortLabel, // Will be replaced with image or text in didDrawCell
+                            styles: { minCellHeight: 6 }
+                        }]
+                    ],
+                    styles: {
+                        font: 'calibri',
+                        fontSize: 11,
+                        valign: 'top'
+                    },
+                    didParseCell: function (data) {
+                        const { row, cell } = data;
+
+                        // Style the header row
+                        if (row.index === 0) {
+                            cell.styles.fillColor = [4, 240, 205]; // Mint Green background
+                            cell.styles.textColor = [0, 63, 121];  // Dark Blue text
+                            cell.styles.fontStyle = 'bold';
+                        }
+                    },
+                    didParseCell: function (data) {
+                        const { row, cell } = data;
+
+                        const isHeaderRow = (row.index === 0 || row.index === 2);
+                        if (isHeaderRow) {
+                            cell.styles.fillColor = [4, 240, 205]; // Mint Green
+                            cell.styles.textColor = [0, 63, 121];  // Mint Dark Blue
+                            cell.styles.fontStyle = 'bold';
+                        } else {
+                            cell.styles.textColor = [87, 87, 87]; // Grey
+                            doc.setFont('calibri', 'normal');
+                        }
+                    },
+                    columnStyles: {
+                        0: { cellWidth: 181.5 }
+                    },
+                    theme: 'grid'
                 });
 
                 y = doc.lastAutoTable.finalY + 10
@@ -428,7 +512,13 @@ export default class MintHealthCheckLite extends LightningElement {
                         if (hasQuantity) {
                             baseRow.push(detail.Quantity);
                         }
-                        baseRow.push(formattedStatus);
+                        // console.log('Formatted Status:', formattedStatus);
+                        // console.log('Status Label:', statusLabel);
+                        if(formattedStatus === 'No  Action  Required' && statusLabel === 'ReviewRequired') {
+                            baseRow.push('Advisory');
+                        } else {
+                            baseRow.push(formattedStatus);
+                        }
                         return baseRow;
                     });
 
@@ -465,7 +555,7 @@ export default class MintHealthCheckLite extends LightningElement {
                         bodyStyles: {
                             font: 'calibri',
                             fillColor: [245, 245, 245],
-                            textColor: [0, 0, 0]
+                            textColor: [87, 87, 87]
                         },
                         alternateRowStyles: {
                             fillColor: [255, 255, 255]
@@ -531,13 +621,13 @@ export default class MintHealthCheckLite extends LightningElement {
         });
         const pageCount = doc.getNumberOfPages();
 
-        for (let i = 1; i < pageCount; i++) {
-            doc.setPage(i+2); // Skip cover and TOC pages
+        for (let i = 3; i <= pageCount; i++) {
+            doc.setPage(i); // Skip cover and TOC pages
 
             doc.setFontSize(10);
             doc.setTextColor(100);
             doc.setFont('calibri', 'normal');
-            doc.text(`Page ${i+2} of ${pageCount} | V.1 | Confidential`, 35, pageHeight - 16, { align: 'center' });
+            doc.text(`Page ${i} of ${pageCount} | V.1 | Confidential`, 35, pageHeight - 16, { align: 'center' });
             //doc.text(` ${i+1} / ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
         }
 
