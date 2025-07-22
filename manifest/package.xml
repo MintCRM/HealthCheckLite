@@ -33,6 +33,10 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
+		<members>Health_Check_Org_Metric_Feature_Type__mdt-Health Check Org Metric Category Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>LightningComponentBundle</name>
 	</types>
