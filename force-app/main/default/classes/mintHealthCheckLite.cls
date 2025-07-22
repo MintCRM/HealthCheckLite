@@ -19,12 +19,12 @@ public with sharing class mintHealthCheckLite {
     public static Map<String, sObject> getOrgMetricsFeatureTypeMap() {
         Map<String, sObject> featureTypeMap = new Map<String, sObject>();
 
-        List<mint__Health_Check_Org_Metric_Feature_Type__mdt> featureTypes = [
+        List<Health_Check_Org_Metric_Feature_Type__mdt> featureTypes = [
             SELECT Label, mint__Formatted_Name__c, mint__Recommendation_Text__c, mint__Result_Text__c
-            FROM mint__Health_Check_Org_Metric_Feature_Type__mdt
+            FROM Health_Check_Org_Metric_Feature_Type__mdt
         ];
 
-        for (mint__Health_Check_Org_Metric_Feature_Type__mdt featureType : featureTypes) {
+        for (Health_Check_Org_Metric_Feature_Type__mdt featureType : featureTypes) {
             featureTypeMap.put(featureType.Label, featureType);
         }
 
