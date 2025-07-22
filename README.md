@@ -19,7 +19,7 @@ The `sfdx-project.json` file contains useful configuration information for your 
 
 ## Part 1: Installation
  
-<a href="https://githubsfdeploy.herokuapp.com?owner=NickMintCRM&repo=HealthCheckLite">
+<a href="https://githubsfdeploy.herokuapp.com?owner=MintCRM&repo=HealthCheckLite">
 <img alt="Deploy to Salesforce"
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
